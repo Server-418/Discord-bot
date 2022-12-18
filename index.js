@@ -22,4 +22,18 @@ client.once('ready', () => {
 });
 
 
+client.on('messageCreate',async (Message) => {
+	if(Message.author.bot) {return}
+  if(!Message.content.startsWith(prefix)){return}
+  const cnt = Message.content.toLowerCase();
+  const cmd = cnt.slice(1);//to remove the prefix
+
+
+  if(cmd === "ping"){
+    Message.channel.send("pong");
+}
+
+});
+
+
 client.login(token);
