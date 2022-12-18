@@ -8,7 +8,7 @@ import { TextChannel } from 'discord.js';
 
 
 const exec = promisify(childProcess.exec);
-const token = 'MTA1NDAzNjUwNDI5ODY1MTc1OQ.GJwPPx.bi6FKMlVmh5L9w2c39A-I31QbIjIaBbijzi4ns';
+const token = '';
 
 
 
