@@ -1,6 +1,11 @@
 {
+  "scripts": {
+    "start": "nodemon bot.js"
+  },
   "dependencies": {
     "discord.js": "^14.7.1",
+    "nodemon": "^2.0.20",
     "sandbox": "^0.8.6"
   }
+  
 }
