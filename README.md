@@ -21,3 +21,29 @@ we will optimize our code later in the form of event- and commandhandlers.
 # suggestions
 we appreciate any suggestions of features/commands or changes to current features. <br>
 you can add your suggestions in the issue tab with the lable "suggestion"
+
+# setup
+clone the repository:<br>
+```
+git clone https://github.com/Server-418/Discord-bot.git
+```
+
+install all necessary packages:<br>
+```
+npm install
+```
+
+create a new file named `config.json`<br>
+place this in the file and change `[token]` and `[gitkey]` to your own [discord token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token) and [github api key](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).<br>
+```
+{
+	"token": "[token]",
+	"prefix": "!",
+    "gitkey":"[gitkey]"
+}
+```
+
+then run this command to start your bot:
+```
+node index.js
+```
