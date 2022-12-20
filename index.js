@@ -1,12 +1,9 @@
-const discord = require("discord.js")
-const sandbox = require("sandbox")
 const path = require("path")
 const fs = require("fs");
 const { Client,Collection,Events, GatewayIntentBits,ActivityType, Message, messageLink, TextChannel, Discord, EmbedBuilder} = require('discord.js');
 
 
-const { prefix ,token } = require('./config.json');
-const Sandbox = require("sandbox");
+const { token } = require('./config.json');
 
 
 const client = new Client({ intents: [

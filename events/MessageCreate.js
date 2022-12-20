@@ -14,7 +14,7 @@ module.exports = {
         
         switch (cmd) {
           case "ping": Message.channel.send("pong"); console.log("pong!"); break;
-          case "exec": compileCode(args, Message); break;
+          case "exec": compileCode(args, Message); break;//doest work now 
           default: Message.channel.send("[418] I'm a Teapot!"); break;
         }
       
