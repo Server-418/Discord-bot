@@ -1,5 +1,7 @@
 const discord = require("discord.js")
 const sandbox = require("sandbox")
+const path = require("path")
+const fs = require("fs");
 const { Client,Collection,Events, GatewayIntentBits,ActivityType, Message, messageLink, TextChannel, Discord, EmbedBuilder} = require('discord.js');
 
 
@@ -18,35 +20,23 @@ const client = new Client({ intents: [
 });
 
 
-client.once('ready', () => {
-	console.log('bot is ready');
-    client.user.setPresence({ activities: [{ name: `being developed`, type: ActivityType.Competing }], status: 'online' });
-});
-
-
-client.on('messageCreate',async (Message) => {
-	if(Message.author.bot) {return}
-  if(!Message.content.startsWith(prefix)){return}
-  const cmd = Message.content.slice(1).split(" ")[0].toLowerCase(); //to remove the prefix and arguments
-  const args = Message.content.slice(cmd.length+prefix.length).trim()
-
-  switch (cmd) {
-    case "ping": Message.channel.send("pong"); break;
-    case "exec": compileCode(args, Message); break;
-    default: Message.channel.send("[418] I'm a Teapot!"); break;
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));//filter all the non js files
+ for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+  
+  
+	if (event.once)  {
+    
+		 client.once(event.name,(...args) =>  event.execute(...args));//execute all the .once events only once
+	} 
+  else{
+    
+     client.on(event.name,(...args) =>  event.execute(...args));//else always execute them
+    
   }
-});
-
-
-function compileCode(code, Message) {
-  const regexPattern = new RegExp(/`{1,}(.*?)`{1,}/); // Snippet that is wrapped in atleast one backtick ( Discord code block )
-  var match = regexPattern.exec(code.replace(/\n/g, " "));
-  if (match.length < 1) {Message.channel.send("Please wrap your code in backticks! (```) ")}
-  // TODO: Add support for multiple code snippets
-  var s = new Sandbox();
-  s.run(match[1], function(output) {
-  Message.channel.send("result:\n`"+output.result+"`\nconsole:\n[`"+output.console.join(",")+"`]");
-  });
+  
 }
 
 client.login(token);
